@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>2c72f682-3f07-46a3-96a2-03559bc227c2</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="ConfigurationStore\**"/>
+    <Content Remove="ConfigurationStore\**"/>
+    <EmbeddedResource Remove="ConfigurationStore\**"/>
+    <None Remove="ConfigurationStore\**"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="3.1.2"/>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1"/>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Utils" Version="3.1.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.0.0"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IdSrv.Cosmos.Data\IdSrv.Cosmos.Data.csproj"/>
+  </ItemGroup>
+</Project>

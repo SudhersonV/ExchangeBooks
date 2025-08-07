@@ -1,0 +1,62 @@
+﻿using System.Collections.Generic;
+using Firebase.Analytics;
+using ExchangeBooks.iOS;
+using Foundation;
+using Xamarin.Forms;
+using ExchangeBooks.Interfaces.Framework;
+
+[assembly: Dependency(typeof(EventTrackerService))]
+namespace ExchangeBooks.iOS
+{
+    public class EventTrackerService : IEventTracker
+    {
+        public void SendEvent(string eventId)
+        {
+            SendEvent(eventId, (IDictionary<string, string>)null);
+        }
+
+        public void SendEvent(string eventId, string paramName, string value)
+        {
+            SendEvent(eventId, new Dictionary<string, string>
+            {
+                { paramName, value }
+            });
+        }
+
+        public void SendEvent(string eventId, IDictionary<string, string> parameters)
+        {
+            if (parameters == null)
+            {
+                Analytics.LogEvent(eventId, (Dictionary<object, object>)null);
+                return;
+            }
+
+            var keys = new List<NSString>();
+            var values = new List<NSString>();
+            foreach (var item in parameters)
+            {
+                keys.Add(new NSString(item.Key));
+                values.Add(new NSString(item.Value));
+            }
+
+            var parametersDictionary =
+                NSDictionary<NSString, NSObject>.FromObjectsAndKeys(values.ToArray(), keys.ToArray(), keys.Count);
+            Analytics.LogEvent(eventId, parametersDictionary);
+        }
+
+        public void SetCurrentScreen(string screenName, string screenClassOverride)
+        {
+            Analytics.SetScreenNameAndClass(screenName, screenClassOverride);
+        }
+
+        public void SetUserId(string userId)
+        {
+            Analytics.SetUserId(userId);
+        }
+
+        public void SetUserProperty(string name, string value)
+        {
+            Analytics.SetUserProperty(value, name);
+        }
+    }
+}

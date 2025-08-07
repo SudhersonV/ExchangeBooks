@@ -1,0 +1,14 @@
+{
+    "id": "425e3e1f-02bf-4bf9-87da-8ef169df2646",
+    "required": true,
+    "emphasize": false,
+    "showInDiscoveryDocument": true,
+    "enabled": true,
+    "name": "openid",
+    "displayName": "openid",
+    "description": null,
+    "userClaims": [
+        "sub"
+    ],
+    "properties": {}
+}

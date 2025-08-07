@@ -1,0 +1,14 @@
+{
+    "id": "0c290366-83c9-4932-bd4e-9a797f1615b8",
+    "required": true,
+    "emphasize": false,
+    "showInDiscoveryDocument": true,
+    "enabled": true,
+    "name": "profile",
+    "displayName": "profile",
+    "description": null,
+    "userClaims": [
+        "sub"
+    ],
+    "properties": {}
+}

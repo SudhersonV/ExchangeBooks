@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.1874" />
+    <PackageReference Include="Polly" Version="7.2.1" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.470" />
+    <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="Plugin.Fingerprint" Version="2.1.3" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bootstrap\" />
+    <Folder Include="Services\Data\" />
+    <Folder Include="Services\Framework\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Interfaces\Data\" />
+    <Folder Include="Interfaces\Framework\" />
+    <Folder Include="Utility\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Interfaces\Repository\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Styles\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Fonts\" />
+    <Folder Include="ValueConverters\" />
+    <Folder Include="Views\Chat\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Services\Http\" />
+    <Folder Include="Models\Request\" />
+    <Folder Include="Models\Response\" />
+    <Folder Include="Interfaces\Http\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Core\" />
+    <Folder Include="Core\Pages\" />
+    <Folder Include="Core\Navigation\" />
+    <Folder Include="Core\ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\Fonts\iconize-material.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\iconize-material.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Chat\IncomingViewCell.xaml.cs">
+      <DependentUpon>IncomingViewCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Chat\OutgoingViewCell.xaml.cs">
+      <DependentUpon>OutgoingViewCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

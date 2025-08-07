@@ -1,0 +1,184 @@
+@model IdSrv.Host.ViewModels.LoginRegisterViewModel
+@using System.Net;
+@functions{ 
+    public string GetActiveTabClass(string tabName)
+    {
+        return tabName == Model.SourceTab ?
+            "tab-pane fade in active" : "tab-pane fade";
+    }
+
+    public string GetActiveLiClass(string tabName)
+    {
+        return tabName == Model.SourceTab ?
+            "active" : string.Empty;
+    }
+}
+@section Scripts {
+    <script src="~/js/external-login.js"></script>
+}
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="@GetActiveLiClass("login")"><a data-toggle="tab" href="#loginpage"><b>Login</b></a></li>
+        <li class="@GetActiveLiClass("register")"><a data-toggle="tab" href="#registerpage"><b>Register</b></a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="loginpage" class="@GetActiveTabClass("login")">
+            <div class="login-page">
+                @if(Model.SourceTab == "login")
+                {
+                    <partial name="_ValidationSummary" />
+                }
+                <div class="row">
+                @if (Model.EnableLocalLogin)
+                {
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Local Login</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form asp-action="Login" method="POST">
+                                    <input type="hidden" asp-for="ReturnUrl" />
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label asp-for="UserName"></label>
+                                            <input class="form-control" placeholder="UserName" asp-for="UserName" autofocus>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Password"></label>
+                                            <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
+                                        </div>
+                                        @if (Model.AllowRememberLogin)
+                                        {
+                                            <div class="form-group login-remember">
+                                                <label asp-for="RememberLogin">
+                                                    <input asp-for="RememberLogin">
+                                                    <strong>Remember My Login</strong>
+                                                </label>
+                                            </div>
+                                        }
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" name="button" value="login">Login</button>
+                                            <button class="btn btn-default" name="button" value="cancel">Cancel</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.VisibleExternalProviders.Any())
+                {
+                    <div class="col-md-6 col-sm-6 external-providers">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">External Login</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="external-list-inline">
+                                    @foreach (var provider in Model.VisibleExternalProviders)
+                                    {
+                                        <li id="@provider.AuthenticationScheme-signclick" class="external-login-btn">
+                                            <img class="external-img" src="~/@provider.DisplayIcon" alt="@provider.DisplayName">
+                                            <label class="external-label">
+                                                @provider.DisplayName
+                                            </label>
+                                            <a class="external-a-invisible"
+                                                asp-controller="External"
+                                                asp-action="Challenge"
+                                                asp-route-provider="@provider.AuthenticationScheme"
+                                                asp-route-returnUrl="@Model.ReturnUrl">
+                                                @provider.DisplayName
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
+                {
+                    <div class="alert alert-warning">
+                        <strong>Invalid login request</strong>
+                        There are no login schemes configured for this client.
+                    </div>
+                }
+                </div>
+            </div>
+        </div>
+        <div id="registerpage" class="@GetActiveTabClass("register")">
+            <div class="login-page">
+                @if(Model.SourceTab == "register")
+                {
+                    <partial name="_ValidationSummary" />
+                }
+                <div class="row">
+                @if (Model.RegisterViewModel.IsAfterRegistrationPost)
+                {
+                    @if(Model.RegisterViewModel.RegistrationStatus == HttpStatusCode.OK)
+                    {
+                    <div class="label label-success">
+                        <label>Registration successful, please remember to confirm the registration via the email link.</label>
+                        <label>Please use the Back button at the bottom to go back to the application, and login.</label>
+                    </div>
+                    }
+                    else 
+                    {
+                        if(Model.RegisterViewModel.RegistrationStatus == HttpStatusCode.Conflict)
+                        {
+                        <div class="label label-warning">
+                            <label>Registration failed, the email address is already registered.</label>
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="label label-danger">
+                            <label>Registration failed :-(), please try later.</label>
+                        </div>
+                        }
+                        <div class="form-group">
+                            <a asp-action="Register" asp-controller="Account" asp-route-returnUrl="@Model.RegisterViewModel.ReturnUrl">Try again</a>
+                        </div>
+                    }
+                }
+                else
+                {           
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Local Registration</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form asp-action="Register" method="POST">
+                                    <input type="hidden" name="ReturnUrl" asp-for="RegisterViewModel.ReturnUrl" />
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <input class="form-control" name="FirstName" placeholder="First Name" asp-for="RegisterViewModel.FirstName" autofocus>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" name="LastName" placeholder="Last Name" asp-for="RegisterViewModel.LastName">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" name="Email" placeholder="Email Address" asp-for="RegisterViewModel.Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="Password1" class="form-control" placeholder="Password" asp-for="RegisterViewModel.Password1" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="Password2" class="form-control" placeholder="Confirm Password" asp-for="RegisterViewModel.Password2" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" name="button" value="register">Register</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>        
+                    </div>  
+                }       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

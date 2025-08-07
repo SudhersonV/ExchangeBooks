@@ -1,0 +1,14 @@
+{
+    "id": "53d07330-e6fb-4d88-853d-e12afdafbac1",
+    "required": true,
+    "emphasize": false,
+    "showInDiscoveryDocument": true,
+    "enabled": true,
+    "name": "email",
+    "displayName": "email",
+    "description": null,
+    "userClaims": [
+        "email"
+    ],
+    "properties": {}
+}

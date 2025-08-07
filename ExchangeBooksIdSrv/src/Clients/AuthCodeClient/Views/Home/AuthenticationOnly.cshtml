@@ -1,0 +1,21 @@
+﻿@model IEnumerable<string>
+@{
+    ViewData["Title"] = "Authorization Only";
+}
+
+<div class="text-center">
+    <h2 class="display-4">You are seeing this page beacuse you are Authenticated!</h2>
+    @if (Model.Any())
+    {
+        foreach (var m in Model)
+        {
+            <p>@m</p>
+        }
+        var rtValue = Model.FirstOrDefault(m => m.StartsWith("RefreshToken"));
+        if(rtValue != null)
+        {
+            var rt = $"Refresh?refreshToken={rtValue.Split(':')[1]?.Trim()}";
+            <a href=@rt title="Get Refresh Token" value="GetRefreshToken">GetRefreshToken</a>
+        }
+    }
+</div>

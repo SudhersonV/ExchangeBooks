@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExchangeBooks.Views.MyPostsPage" xmlns:l="clr-namespace:ExchangeBooks.Constants"
+             xmlns:utility="clr-namespace:ExchangeBooks.Utility" utility:ViewModelLocator.AutoWireViewModel="true"
+             xmlns:sty="clr-namespace:ExchangeBooks.Styles" xmlns:valueconverters="clr-namespace:ExchangeBooks.ValueConverters"
+             x:Name="UserPosts" Visual="Material" Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout IsVisible="{Binding DataFound, Converter={valueconverters:InverseBoolConverter}}">
+                <Label Text="{x:Static l:Constants.NoContent}" Padding="0,50" HorizontalTextAlignment="Center" FontSize="Large" TextColor="Black" />
+            </StackLayout>
+            <CollectionView ItemsSource="{Binding UserPosts}" IsVisible="{Binding DataFound}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <SwipeView Style="{x:Static sty:Styles.DefaultSwipeViewStyle}">
+                                <SwipeView.LeftItems>
+                                    <SwipeItem Command="{Binding BindingContext.DeleteCommand, Source={x:Reference UserPosts}}"
+                                               CommandParameter="{Binding .}" BackgroundColor="Color.Red">
+                                        <SwipeItem.IconImageSource>
+                                            <FontImageSource Glyph="{x:Static l:MaterialIcons.Delete}" FontFamily="{x:Static l:MaterialIcons.FontFamily}"/>
+                                        </SwipeItem.IconImageSource>
+                                    </SwipeItem>
+                                </SwipeView.LeftItems>
+                                <Frame Style="{x:Static sty:Styles.ButtonSwipeFrameStyle}">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Name, StringFormat='{0} -'}" FontSize="Medium"  VerticalTextAlignment="Center" />
+                                        <Label Text="{Binding Status}" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" />
+                                    </StackLayout>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.ViewCommand,
+                                        Source={x:Reference UserPosts}}" CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </SwipeView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

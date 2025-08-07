@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExchangeBooks.Views.ChatPage" xmlns:helper="clr-namespace:ExchangeBooks.Helpers"
+             xmlns:sty="clr-namespace:ExchangeBooks.Styles" xmlns:partials="clr-namespace:ExchangeBooks.Views.Chat"
+             xmlns:l="clr-namespace:ExchangeBooks.Constants"
+             xmlns:utility="clr-namespace:ExchangeBooks.Utility" utility:ViewModelLocator.AutoWireViewModel="true"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <helper:ChatTemplateSelector x:Key="MessageTemplateSelector"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid RowSpacing="0" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ListView x:Name="ChatList" Grid.Row="0" 
+                 ItemTemplate="{StaticResource MessageTemplateSelector}" 
+                 ItemsSource="{Binding Messages}" 
+                 Margin="0"
+                 ItemTapped="OnListTapped"
+                 Rotation="180" 
+                 FlowDirection="RightToLeft"
+                 HasUnevenRows="True" 
+                 VerticalOptions="FillAndExpand" 
+                 SeparatorColor="Transparent"
+                 ItemAppearing="OnMessageAppearing"
+                 ItemDisappearing="OnMessageDisappearing">
+                </ListView>
+                <Frame Grid.Row="0"
+                       HorizontalOptions="EndAndExpand" VerticalOptions="End"
+                                 Margin="0,0,2,15" Padding="1" HasShadow="false"
+                                 HeightRequest="50" WidthRequest="50" CornerRadius="25"
+                                 BackgroundColor="{x:Static sty:Colors.IconColor}"   
+                                 IsVisible="{Binding ShowScrollTap}">
+                    <Grid RowSpacing="0" ColumnSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label IsVisible="{Binding ShowScrollTap}" Text="{x:Static l:MaterialIcons.ArrowDropDownCircle}" FontFamily="{x:Static l:MaterialIcons.FontFamily}"
+                            TextColor="{x:Static sty:Colors.TabIconColor}" FontSize="Large" 
+                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+                        <Label Grid.Row="1" IsVisible="{Binding HasPendingMessage}" Text="{Binding PendingMessageCount}"
+                            HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" TextColor="{x:Static sty:Colors.TabIconColor}"/>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ScrollTap" Command="{Binding OnScrollCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <BoxView Grid.Row="1" HorizontalOptions="FillAndExpand" HeightRequest="1"
+                 BackgroundColor="{x:Static sty:Colors.LabelColor}" />
+                <partials:ChatInputBarView x:Name="chatInput" Grid.Row="2" Padding="10,0,10,5"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,100 @@
+﻿@model IdSrv.Host.ViewModels.RegisterViewModel
+@using System.Net;
+
+<div class="login-page">
+    <div class="page-header">
+        <h1>Register</h1>
+    </div>
+    <partial name="_ValidationSummary" />
+    <div class="row">
+        @if (Model.IsAfterRegistrationPost)
+        {
+            @if(Model.RegistrationStatus == HttpStatusCode.OK)
+            {
+            <div class="label label-success">
+                <label>Registration successful, please remember to confirm the registration via the email link.</label>
+                <label>Please use the Back button at the bottom to go back to the application, and login.</label>
+            </div>
+            }
+            else 
+            {
+                if(Model.RegistrationStatus == HttpStatusCode.Conflict)
+                {
+                <div class="label label-warning">
+                    <label>Registration failed, the email address is already registered.</label>
+                </div>
+                }
+                else
+                {
+                <div class="label label-danger">
+                    <label>Registration failed :-(), please try later.</label>
+                </div>
+                }
+                <div class="form-group">
+                    <a href="~/Account/Register">Try again</a>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Local Registration</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form asp-route="Register">
+                            <fieldset>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Name</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="First Name" asp-for="FirstName" autofocus>
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Last Name" asp-for="LastName">
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Email</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Email Address" asp-for="Email">
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Password</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="Password" asp-for="Password1" autocomplete="off">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="Confirm Password" asp-for="Password2" autocomplete="off">
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" name="button" value="register">Register</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>        
+            </div>
+        }
+    </div>
+</div>

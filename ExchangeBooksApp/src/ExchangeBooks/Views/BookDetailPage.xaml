@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ExchangeBooks.Views.BookDetailPage" xmlns:l="clr-namespace:ExchangeBooks.Constants"
+    xmlns:sty="clr-namespace:ExchangeBooks.Styles"
+    xmlns:utility="clr-namespace:ExchangeBooks.Utility" utility:ViewModelLocator.AutoWireViewModel="true"
+    xmlns:bhv="clr-namespace:ExchangeBooks.Behaviors">
+    <ContentPage.Content>
+        <StackLayout Style="{x:Static sty:Styles.DefaultStackLayoutStyle}">
+            <Label Text="{x:Static l:MaterialIcons.LocalPostOffice}"  Style="{x:Static sty:Styles.DefaultIconLabelStyle}" />
+            <ScrollView VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Entry x:Name="Name"
+                       Text="{Binding Name}"
+                       Placeholder="{x:Static l:LabelConstants.Name}"
+                       Style="{x:Static sty:Styles.DefaultEntryStyle}"
+                       PropertyChanged="Entry_PropertyChanged" />
+                    <Entry x:Name="Description"
+                       Text="{Binding Description}"
+                       Placeholder="{x:Static l:LabelConstants.Description}"
+                       Style="{x:Static sty:Styles.DefaultEntryStyle}"
+                       PropertyChanged="Entry_PropertyChanged" />
+                    <Picker x:Name="Condition"
+                        ItemsSource="{Binding BookConditions}"
+                        SelectedItem="{Binding BookCondition}"
+                        Title="{x:Static l:LabelConstants.Condition}"
+                        Style="{x:Static sty:Styles.DefaultPickerStyle}"
+                        PropertyChanged="Picker_PropertyChanged" />
+                    <Picker x:Name="Class"
+                        ItemsSource="{Binding BookClasses}"
+                        SelectedItem="{Binding BookClass}"
+                        Title="{x:Static l:LabelConstants.Class}"
+                        Style="{x:Static sty:Styles.DefaultPickerStyle}"
+                        PropertyChanged="Picker_PropertyChanged" />
+                    <Entry x:Name="Price"
+                       Text="{Binding Price, Mode=OneWayToSource}"
+                       Placeholder="{x:Static l:LabelConstants.Price}"
+                       Style="{x:Static sty:Styles.DefaultEntryStyle}"
+                       Keyboard="Numeric"
+                       PropertyChanged="Entry_PropertyChanged">
+                        <Entry.Behaviors>
+                            <bhv:DoubleValidationBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Button Text="{x:Static l:LabelConstants.Next}" 
+                        Clicked="OnNextButtonClicked"
+                        Style="{x:Static sty:Styles.DefaultButtonStyle}" />
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

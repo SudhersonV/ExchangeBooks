@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ExchangeBooks.Views.ViewBookPage" xmlns:l="clr-namespace:ExchangeBooks.Constants"
+    xmlns:sty="clr-namespace:ExchangeBooks.Styles" xmlns:valueconverters="clr-namespace:ExchangeBooks.ValueConverters"
+    xmlns:utility="clr-namespace:ExchangeBooks.Utility" utility:ViewModelLocator.AutoWireViewModel="true"
+    xmlns:bhv="clr-namespace:ExchangeBooks.Behaviors" Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout Style="{x:Static sty:Styles.DefaultStackLayoutStyle}">
+            <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" Padding="0,10,0,0">
+                <Frame Style="{x:Static sty:Styles.DefaultFrameStyle}"
+                                        HeightRequest="165" WidthRequest="150">
+                    <StackLayout HorizontalOptions="CenterAndExpand">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Status" Style="{x:Static sty:Styles.DefaultHeaderLabelStyle}" VerticalOptions="Center"/>
+                            <Label Text="{Binding Book.Status}" Style="{x:Static sty:Styles.DefaultLabelStyle}"
+                                   IsVisible="{Binding CanEditStatus, Converter={valueconverters:InverseBoolConverter}}"/>
+                            <Picker x:Name="BookStatus" IsVisible="{Binding CanEditStatus}" WidthRequest="125"
+                            ItemsSource="{Binding BookStatuses}"
+                            SelectedItem="{Binding BookStatus}" Style="{x:Static sty:Styles.DefaultPickerStyle}">
+                                <Picker.Behaviors>
+                                    <bhv:PickerBehavior Command="{Binding BookStatusChanged}"/>
+                                </Picker.Behaviors>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Class" Style="{x:Static sty:Styles.DefaultHeaderLabelStyle}"/>
+                            <Label Text="{Binding Book.Class}" Style="{x:Static sty:Styles.DefaultLabelStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Condition" Style="{x:Static sty:Styles.DefaultHeaderLabelStyle}"/>
+                            <Label Text="{Binding Book.Condition}" Style="{x:Static sty:Styles.DefaultLabelStyle}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <StackLayout Padding="5">
+                    <CarouselView x:Name="photoCarousel" ItemsSource="{Binding Book.Images}" CurrentItem="{Binding CurrentImage}" IndicatorView="indicatorView" HeightRequest="300">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle" SnapPointsAlignment="Start" />
+                        </CarouselView.ItemsLayout>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Image Source="{Binding Content, Converter={valueconverters:Base64ToStreamConverter}}"
+                                       HeightRequest="300" Aspect="AspectFill"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView x:Name="indicatorView"
+                       IndicatorsShape="Square"
+                       IndicatorColor="LightGray"
+                       SelectedIndicatorColor="DarkGray"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,20">
+                    </IndicatorView>
+                </StackLayout>
+                <StackLayout HorizontalOptions="Center">
+                    <Label Text="{x:Static l:MaterialIcons.Delete}" Style="{x:Static sty:Styles.DefaultIconLabelStyle}"
+                           IsVisible="{Binding CanDelete}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DeleteBook}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

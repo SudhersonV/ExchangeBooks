@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExchangeBooks.Views.NotificationPage" xmlns:l="clr-namespace:ExchangeBooks.Constants"
+             xmlns:utility="clr-namespace:ExchangeBooks.Utility" utility:ViewModelLocator.AutoWireViewModel="true"
+             xmlns:sty="clr-namespace:ExchangeBooks.Styles" x:Name="Messages" Visual="Material">
+    <ContentPage.Content>
+        <StackLayout Style="{x:Static sty:Styles.DefaultStackLayoutStyle}">
+            <CollectionView ItemsSource="{Binding Notifications}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <SwipeView Style="{x:Static sty:Styles.DefaultSwipeViewStyle}">
+                                <SwipeView.RightItems>
+                                    <SwipeItem BackgroundColor="Color.Green">
+                                        <SwipeItem.IconImageSource>
+                                            <FontImageSource Glyph="{x:Static l:MaterialIcons.Archive}" FontFamily="{x:Static l:MaterialIcons.FontFamily}" />
+                                        </SwipeItem.IconImageSource>
+                                    </SwipeItem>
+                                </SwipeView.RightItems>
+                                <Frame Style="{x:Static sty:Styles.DefaultSwipeFrameStyle}">
+                                    <StackLayout>
+                                        <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold" />
+                                        <Label Text="{Binding Content}" />
+                                    </StackLayout>
+                                </Frame>
+                            </SwipeView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

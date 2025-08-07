@@ -1,0 +1,17 @@
+﻿@model  IEnumerable<AuthCodeClient.ViewModels.WeatherForecast>
+
+@{
+    ViewData["Title"] = "Weatherforecast Data";
+}
+<h1>@ViewData["Title"]</h1>
+
+@if (!Model.Any())
+{
+<p>401 - UnAuthorized!</p>
+}
+else {
+    foreach(var wea in Model)
+    {
+       <p>@wea.Summary</p>
+    }
+}

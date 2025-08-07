@@ -1,0 +1,48 @@
+{
+    "id": "22296c2d-18d8-418b-be96-f557cad411de",
+    "apiSecrets": [
+        {
+            "description": "SharedSecret",
+            "value": "",
+            "expiration": null,
+            "type": "SharedSecret"
+        }
+    ],
+    "scopes": [
+        {
+            "name": "customAPI.read",
+            "displayName": "customAPI.read",
+            "description": null,
+            "required": false,
+            "emphasize": false,
+            "showInDiscoveryDocument": true,
+            "userClaims": []
+        },
+        {
+            "name": "customAPI.write",
+            "displayName": "customAPI.write",
+            "description": null,
+            "required": false,
+            "emphasize": false,
+            "showInDiscoveryDocument": true,
+            "userClaims": []
+        },
+        {
+            "name": "postBooks.write",
+            "displayName": "postBooks.write",
+            "description": "Required to add posts",
+            "required": true,
+            "emphasize": true,
+            "showInDiscoveryDocument": true,
+            "userClaims": []
+        }
+    ],
+    "enabled": true,
+    "name": "customAPI",
+    "displayName": "Custom API",
+    "description": "Custom API Access",
+    "userClaims": [
+        "role"
+    ],
+    "properties": {}
+}

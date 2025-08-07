@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<c:BasePopupPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExchangeBooks.Views.HidePostPage" xmlns:c="clr-namespace:ExchangeBooks.Core.Pages"
+             xmlns:sty="clr-namespace:ExchangeBooks.Styles" xmlns:l="clr-namespace:ExchangeBooks.Constants"
+             xmlns:utility="clr-namespace:ExchangeBooks.Utility" utility:ViewModelLocator.AutoWireViewModel="true"
+                 Title="{Binding Title}">
+    <ContentPage.Resources>
+        <Style TargetType="RadioButton">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CheckedStates">
+                        <VisualState x:Name="Checked">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor"
+                                        Value="Red" />
+                                <Setter Property="Opacity"
+                                        Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Unchecked">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor"
+                                        Value="Green" />
+                                <Setter Property="Opacity"
+                                        Value="0.75" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Margin="20" BackgroundColor="{x:Static sty:Colors.PopupBackgroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <BoxView VerticalOptions="Fill" HorizontalOptions="Fill" Grid.RowSpan="3" CornerRadius="5"/>
+            <Label Margin="10" Grid.Row="1" Text="Please select from the below options" HorizontalTextAlignment="Center"/>
+            <StackLayout Grid.Row="2" RadioButtonGroup.GroupName="hideOptions"
+                         RadioButtonGroup.SelectedValue="{Binding SelectedOption}" BackgroundColor="{x:Static sty:Colors.LabelColor}">
+                <RadioButton Content="Hide this post" Value="1" BackgroundColor="{x:Static sty:Colors.LabelColor}" />
+                <RadioButton Margin="0,5,0,0" Content="Hide all posts from this user" Value="2" BackgroundColor="{x:Static sty:Colors.LabelColor}"/>
+            </StackLayout>
+            <StackLayout Grid.Row="3">
+                <Button x:Name="btnCancel" Text="{x:Static l:LabelConstants.Cancel}" Command="{Binding CancelCmd}"
+                        Style="{x:Static sty:Styles.DefaultButtonStyle}" />
+                <Button x:Name="btnSubmit" Text="{x:Static l:LabelConstants.Submit}" Command="{Binding SubmitCmd}"
+                        Style="{x:Static sty:Styles.DefaultButtonStyle}" IsEnabled="{Binding IsSubmitEnabled}" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</c:BasePopupPage>

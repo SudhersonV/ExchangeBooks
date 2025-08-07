@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExchangeBooks.Views.WorkInProgressPage" xmlns:l="clr-namespace:ExchangeBooks.Constants"
+             xmlns:sty="clr-namespace:ExchangeBooks.Styles">
+    <ContentPage.Content>
+        <StackLayout Style="{x:Static sty:Styles.DefaultStackLayoutStyle}">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Label Text="{x:Static l:MaterialIcons.WatchLater}" FontFamily="{x:Static l:MaterialIcons.FontFamily}" TextColor="Green" FontSize="Header" HorizontalTextAlignment="Center" />
+                <Label Text="{x:Static l:LabelConstants.WorkInProgress}" Style="{x:Static sty:Styles.DefaultHeaderLabelStyle}" FontSize="Large"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

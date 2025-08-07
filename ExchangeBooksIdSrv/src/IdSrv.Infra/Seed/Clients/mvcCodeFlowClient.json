@@ -1,0 +1,72 @@
+{
+    "id": "109d4d63-4a10-4256-b314-9248f886d6e2",
+    "enabled": true,
+    "clientId": "mvcCodeFlowClient",
+    "protocolType": "oidc",
+    "clientSecrets": [
+        {
+            "description": "Sample auth code client",
+            "value": "",
+            "expiration": null,
+            "type": "SharedSecret"
+        }
+    ],
+    "requireClientSecret": true,
+    "clientName": "mvcCodeFlowClient",
+    "description": null,
+    "clientUri": null,
+    "logoUri": null,
+    "requireConsent": true,
+    "allowRememberConsent": false,
+    "allowedGrantTypes": [
+        "authorization_code"
+    ],
+    "requirePkce": true,
+    "allowPlainTextPkce": false,
+    "allowAccessTokensViaBrowser": true,
+    "redirectUris": [
+        "https://localhost:5001/signin-oidc"
+    ],
+    "postLogoutRedirectUris": [
+        "https://localhost:5001/signout-callback-oidc"
+    ],
+    "frontChannelLogoutUri": null,
+    "frontChannelLogoutSessionRequired": true,
+    "backChannelLogoutUri": null,
+    "backChannelLogoutSessionRequired": true,
+    "allowOfflineAccess": true,
+    "allowedScopes": [
+        "openid",
+        "profile",
+        "email",
+        "offline_access",
+        "role",
+        "exchangeBooks.write"
+    ],
+    "alwaysIncludeUserClaimsInIdToken": true,
+    "identityTokenLifetime": 300,
+    "accessTokenLifetime": 86400,
+    "authorizationCodeLifetime": 300,
+    "absoluteRefreshTokenLifetime": 2592000,
+    "slidingRefreshTokenLifetime": 1296000,
+    "consentLifetime": null,
+    "refreshTokenUsage": 2,
+    "updateAccessTokenClaimsOnRefresh": true,
+    "refreshTokenExpiration": 1,
+    "accessTokenType": 0,
+    "enableLocalLogin": true,
+    "identityProviderRestrictions": [],
+    "includeJwtId": true,
+    "claims": [],
+    "alwaysSendClientClaims": true,
+    "clientClaimsPrefix": "client_",
+    "pairWiseSubjectSalt": null,
+    "userSsoLifetime": null,
+    "userCodeType": null,
+    "deviceCodeLifetime": 300,
+    "allowedCorsOrigins": [
+        "https://localhost:44372",
+        "http://localhost:44372"
+    ],
+    "properties": {}
+}

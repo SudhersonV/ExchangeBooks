@@ -1,0 +1,12 @@
+{
+    "id": "90cc7f2e-1427-4e0f-b282-6fc1fd5fa92e",
+    "required": true,
+    "emphasize": true,
+    "showInDiscoveryDocument": true,
+    "enabled": true,
+    "name": "offline_access",
+    "displayName": "offline_access",
+    "description": "Required for biometrics enabled login",
+    "userClaims": [],
+    "properties": {}
+}

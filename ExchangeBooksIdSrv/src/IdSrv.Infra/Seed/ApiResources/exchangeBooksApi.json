@@ -1,0 +1,28 @@
+{
+    "id": "b73711c0-d7b3-4fc7-a146-3e054df23940",
+    "apiSecrets": [
+        {
+            "description": "SharedSecret",
+            "value": "",
+            "expiration": null,
+            "type": "SharedSecret"
+        }
+    ],
+    "scopes": [
+        {
+            "name": "exchangeBooks.write",
+            "displayName": "ExchangeBooks Write",
+            "description": "Required to add posts, notifications & chat features",
+            "required": true,
+            "emphasize": true,
+            "showInDiscoveryDocument": true,
+            "userClaims": []
+        }
+    ],
+    "enabled": true,
+    "name": "exchangeBooksApi",
+    "displayName": "ExchangeBooks Api",
+    "description": "ExchangeBooks Api Write Access",
+    "userClaims": [],
+    "properties": {}
+}

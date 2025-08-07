@@ -1,0 +1,38 @@
+@model IdSrv.Host.ViewModels.EmailViewModel
+@{
+    Layout = "_HeadlessLayout";
+}
+
+<partial name="_ValidationSummary" />
+<div class="row">
+    <div class="col-sm-6">
+        @if (@Model.IsEmailSent)
+        {
+            <p>Email sent to moderator!</p>
+            <a asp-action="Support" asp-controller="Home">Support</a>
+        }
+        else
+        {
+            <div class="panel-body">
+                <form asp-action="Email" method="POST">
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control" name="FromEmail" placeholder="Your Email" asp-for="FromEmail"
+                                autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="FromName" placeholder="Your Name" asp-for="FromName"
+                                autofocus>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" name="Body" placeholder="Body" asp-for="Body"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" name="button" value="email">Send</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        }
+    </div>
+</div>

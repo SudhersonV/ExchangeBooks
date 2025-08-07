@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<c:BasePopupPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ExchangeBooks.Views.EulaPage" xmlns:c="clr-namespace:ExchangeBooks.Core.Pages"
+    xmlns:sty="clr-namespace:ExchangeBooks.Styles" xmlns:l="clr-namespace:ExchangeBooks.Constants"
+    xmlns:utility="clr-namespace:ExchangeBooks.Utility" utility:ViewModelLocator.AutoWireViewModel="true">
+    <ContentPage.Content>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <BoxView BackgroundColor="White" VerticalOptions="Fill" HorizontalOptions="Fill"
+                     Grid.RowSpan="3" CornerRadius="5"/>
+            <WebView x:Name="eulaWebView" Grid.Row="1" Margin="10,0" VerticalOptions="Fill" HorizontalOptions="Fill" />
+            <Grid x:Name="webViewLoading" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ActivityIndicator Grid.Row="1" Color="DarkBlue" IsRunning="True" HeightRequest="60" WidthRequest="60" />
+            </Grid>
+            <StackLayout Grid.Row="2" VerticalOptions="End" Margin="10">
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="eulaChkBox" CheckedChanged="eulaCheckBox_CheckedChanged" WidthRequest="25"/>
+                    <Label Text="{x:Static l:LabelConstants.EulaLabel}" />
+                </StackLayout>
+                <Button x:Name="btnAccept" Text="{x:Static l:LabelConstants.Accept}" Command="{Binding AcceptCmd}"
+                        Style="{x:Static sty:Styles.DefaultButtonStyle}" />
+                <Button x:Name="btnDecline" Text="{x:Static l:LabelConstants.DeclineAndLogout}" Command="{Binding DeclineCmd}"
+                        Style="{x:Static sty:Styles.DefaultButtonStyle}" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</c:BasePopupPage>

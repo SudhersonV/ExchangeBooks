@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExchangeBooks.Views.BookImagePage"
+             xmlns:l="clr-namespace:ExchangeBooks.Constants"
+             xmlns:sty="clr-namespace:ExchangeBooks.Styles"
+             xmlns:utility="clr-namespace:ExchangeBooks.Utility" utility:ViewModelLocator.AutoWireViewModel="true"
+             xmlns:valueconverters="clr-namespace:ExchangeBooks.ValueConverters"
+             Title="{Binding Title}" Visual="Material" x:Name="bookImage">
+    <ContentPage.Content>
+        <StackLayout Style="{x:Static sty:Styles.DefaultStackLayoutStyle}">
+            <Label Text="{x:Static l:MaterialIcons.LocalPostOffice}"  Style="{x:Static sty:Styles.DefaultIconLabelStyle}" />
+            <ScrollView VerticalOptions="FillAndExpand">
+                <StackLayout Padding="5">
+                    <CarouselView x:Name="photoCarousel" ItemsSource="{Binding BookImages}" CurrentItem="{Binding CurrentBookImage}" IndicatorView="indicatorView" HeightRequest="300">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle" SnapPointsAlignment="Start" />
+                        </CarouselView.ItemsLayout>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Image Source="{Binding Source.File, Converter={valueconverters:Base64ToStreamConverter}}"
+                                                HeightRequest="250" Aspect="AspectFill"/>
+                                    <Label Text="{x:Static l:MaterialIcons.Delete}" Style="{x:Static sty:Styles.DefaultIconLabelStyle}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.RemoveImage,
+                                                Source={x:Reference bookImage}}" CommandParameter="{Binding .}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView x:Name="indicatorView"
+                       IndicatorsShape="Square"
+                       IndicatorColor="LightGray"
+                       SelectedIndicatorColor="DarkGray"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,50">
+                        <!--TODO: Add Thumbnail for indicator-->
+                        <!--<IndicatorView.IndicatorTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Image Source="{Binding Source}" HeightRequest="100" Aspect="AspectFill"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </IndicatorView.IndicatorTemplate>-->
+                    </IndicatorView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="{x:Static l:MaterialIcons.AttachFile}" Style="{x:Static sty:Styles.DefaultIconLabelStyle}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AttachClick}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Text="{x:Static l:MaterialIcons.Camera}" Style="{x:Static sty:Styles.DefaultIconLabelStyle}" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CameraClick}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <Button Text="{x:Static l:LabelConstants.Next}" Command="{ Binding NextClick}"
+                        Style="{x:Static sty:Styles.DefaultButtonStyle}" />
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExchangeBooks.Views.AddPostPage" xmlns:l="clr-namespace:ExchangeBooks.Constants"
+             xmlns:utility="clr-namespace:ExchangeBooks.Utility" utility:ViewModelLocator.AutoWireViewModel="true"
+             xmlns:sty="clr-namespace:ExchangeBooks.Styles" Visual="Material">
+    <ContentPage.Content>
+        <StackLayout Style="{x:Static sty:Styles.DefaultStackLayoutStyle}">
+            <Label Text="{x:Static l:MaterialIcons.LocalPostOffice}"  Style="{x:Static sty:Styles.DefaultIconLabelStyle}" />
+                <StackLayout VerticalOptions="CenterAndExpand">
+                    <Button Text="Add Another Book" IsEnabled="False" Style="{x:Static sty:Styles.DefaultButtonStyle}" />
+                    <Button Text="Review And Post" IsEnabled="False" Style="{x:Static sty:Styles.DefaultButtonStyle}" />
+                    <Button Text="Post" Command="{Binding PostClick}" Style="{x:Static sty:Styles.DefaultButtonStyle}" />
+                </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

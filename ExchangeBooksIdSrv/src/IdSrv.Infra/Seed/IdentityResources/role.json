@@ -1,0 +1,14 @@
+{
+    "id": "59160a07-846e-450f-8395-cbaed96f24c1",
+    "required": true,
+    "emphasize": false,
+    "showInDiscoveryDocument": true,
+    "enabled": true,
+    "name": "role",
+    "displayName": "role",
+    "description": null,
+    "userClaims": [
+        "role"
+    ],
+    "properties": {}
+}

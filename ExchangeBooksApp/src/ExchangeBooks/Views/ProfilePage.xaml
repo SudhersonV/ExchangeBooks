@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExchangeBooks.Views.ProfilePage" xmlns:l="clr-namespace:ExchangeBooks.Constants"
+             xmlns:utility="clr-namespace:ExchangeBooks.Utility" utility:ViewModelLocator.AutoWireViewModel="true"
+             xmlns:sty="clr-namespace:ExchangeBooks.Styles" xmlns:bhv="clr-namespace:ExchangeBooks.Behaviors"
+             Title="{Binding Title}" Visual="Material">
+    <ContentPage.Content>
+        <StackLayout Style="{x:Static sty:Styles.DefaultStackLayoutStyle}">
+            <Label Text="{x:Static l:MaterialIcons.Person}" Style="{x:Static sty:Styles.DefaultIconLabelStyle}" />
+            <StackLayout VerticalOptions="CenterAndExpand" BackgroundColor="{x:Static sty:Colors.LabelColor}" IsVisible="{Binding ShowUserInfo}">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" IsVisible="{Binding ShowUserName}">
+                    <Label Text="Name" Style="{x:Static sty:Styles.DefaultHeaderLabelStyle}" />
+                    <Label Text="{Binding UserName}" Style="{x:Static sty:Styles.DefaultLabelStyle}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                    <Label Text="Email" Style="{x:Static sty:Styles.DefaultHeaderLabelStyle}" />
+                    <Label Text="{Binding Email}" Style="{x:Static sty:Styles.DefaultLabelStyle}"/>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Style="{x:Static sty:Styles.DefaultLabelStyle}">
+                    <Label.Text>
+                        <OnPlatform x:TypeArguments="x:String" iOS="FaceId" Android="Biometrics" />
+                    </Label.Text>
+                </Label>
+                <Switch IsToggled="{Binding IsBiometricsOn}" IsEnabled="{Binding EnabledBiometrics}"
+                        Style="{x:Static sty:Styles.DefaultSwitchStyle}">
+                    <Switch.Behaviors>
+                        <bhv:SwitchBehavior Command="{Binding BiometricsChanged}" />
+                    </Switch.Behaviors>
+                </Switch>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="StartAndExpand">
+                <Label Text="{Binding LoginTxt}" Style="{x:Static sty:Styles.DefaultButtonStyle}" FontSize="Medium">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LoginClicked}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label IsVisible="{Binding ShowBiometrics}" Style="{x:Static sty:Styles.DefaultIconLabelStyle}">
+                    <Label.Text>
+                        <OnPlatform x:TypeArguments="x:String" iOS="{x:Static l:MaterialIcons.Face}"
+                                Android="{x:Static l:MaterialIcons.Face}" />
+                    </Label.Text>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BiometricClicked}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            <StackLayout Margin="25" HorizontalOptions="Center" Orientation="Horizontal">
+                <Label Text="{x:Static l:MaterialIcons.ContactMail}" Style="{x:Static sty:Styles.DefaultIconLabelStyle}"/>
+                <Label HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Contact Us" TextColor="Blue" TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SupportClicked}" CommandParameter="{Binding SupportUrl}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

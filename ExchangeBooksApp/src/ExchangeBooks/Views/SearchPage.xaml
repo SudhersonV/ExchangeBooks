@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ExchangeBooks.Views.SearchPage"
+             xmlns:l="clr-namespace:ExchangeBooks.Constants" xmlns:utility="clr-namespace:ExchangeBooks.Utility"
+             utility:ViewModelLocator.AutoWireViewModel="true" xmlns:sty="clr-namespace:ExchangeBooks.Styles"
+             xmlns:valueconverters="clr-namespace:ExchangeBooks.ValueConverters" x:Name="searchPage">
+    <ContentPage.Content>
+        <StackLayout Style="{x:Static sty:Styles.DefaultStackLayoutStyle}">
+            <StackLayout Style="{x:Static sty:Styles.SearchStackLayoutStyle}">
+                <Entry x:Name="SearchText" Text="{Binding SearchText}" Placeholder="{x:Static l:LabelConstants.SearchTextPlaceHolder}"
+                       PropertyChanged="Entry_PropertyChanged" Style="{x:Static sty:Styles.DefaultEntryStyle}" />
+                <ImageButton x:Name="SearchBtn" Style="{x:Static sty:Styles.ImageButtonStyle}" Command="{Binding SearchClick}" WidthRequest="50">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="{x:Static l:MaterialIcons.Search}" FontFamily="{x:Static l:MaterialIcons.FontFamily}"
+                                         Color="{x:Static sty:Colors.IconColor}" />
+                    </ImageButton.Source>
+                </ImageButton>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding DataFound, Converter={valueconverters:InverseBoolConverter}}">
+                <Label Text="{x:Static l:Constants.NoContent}" Padding="0,50" HorizontalTextAlignment="Center" FontSize="Large" TextColor="Black" />
+            </StackLayout>
+            <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+                <CollectionView ItemsSource="{Binding BooksResponse}" IsVisible="{Binding DataFound}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{x:Static sty:Styles.SearchFrameStyle}" HeightRequest="70">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Book.Name}" FontSize="Medium" />
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Label IsVisible="{Binding IsChatVisible}" Text="{x:Static l:MaterialIcons.ChatBubble}"
+                                               Style="{x:Static sty:Styles.DefaultIconLabelStyle}" FontSize="25">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.ChatClick,
+                                                    Source={x:Reference searchPage}}" CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Grid.Row="1" IsVisible="{Binding IsChatVisible}" Text="{x:Static l:MaterialIcons.Block}"
+                                               Style="{x:Static sty:Styles.DefaultIconLabelStyle}" FontSize="25">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.HideClick,
+                                                    Source={x:Reference searchPage}}" CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Grid.Row="2" IsVisible="{Binding IsChatVisible}" Text="{x:Static l:MaterialIcons.Flag}"
+                                               Style="{x:Static sty:Styles.DefaultIconLabelStyle}" FontSize="25">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.FlagClick,
+                                                    Source={x:Reference searchPage}}" CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Grid>
+                                </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.BookClick,
+                                                Source={x:Reference searchPage}}" CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

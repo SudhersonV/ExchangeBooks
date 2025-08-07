@@ -1,0 +1,30 @@
+
+@section Scripts
+{
+    @* <script type="text/javascript">
+        function closeWindow() {
+            window.open('','_parent','');
+            window.close();
+        }
+    </script> *@
+}
+
+<div class="logout-page">
+    <div class="page-header">
+        <h1>Registration</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            @if(ViewBag.Confirmation_IsSuccess)
+            {
+                <p>Email confirmed!</p>
+            }
+            else
+            {
+                <p>Email confirmation failed, please register again and use the link in your email inbox to confirm.</p>
+                <a href="~/Account/Register">Register</a>
+            }
+        </div>
+    </div>
+</div>

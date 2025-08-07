@@ -1,0 +1,70 @@
+{
+    "id": "bb4c4920-b1ff-4248-8d3c-f4543d96b0f0",
+    "enabled": true,
+    "clientId": "exchangeBooksXamarin",
+    "protocolType": "oidc",
+    "clientSecrets": [
+        {
+            "description": null,
+            "value": "",
+            "expiration": null,
+            "type": "SharedSecret"
+        }
+    ],
+    "requireClientSecret": false,
+    "clientName": "ExchangeBooks Mobile",
+    "description": null,
+    "clientUri": null,
+    "logoUri": null,
+    "requireConsent": true,
+    "allowRememberConsent": false,
+    "allowedGrantTypes": [
+        "authorization_code"
+    ],
+    "requirePkce": true,
+    "allowPlainTextPkce": false,
+    "allowAccessTokensViaBrowser": true,
+    "redirectUris": [
+        "https://exchangebooksauthapi.azurewebsites.net/signin-oidc",
+        "https://localhost:5001/signin-oidc"
+    ],
+    "postLogoutRedirectUris": [
+        "https://exchangebooksauthapi.azurewebsites.net/signout-callback-oidc",
+        "https://localhost:5001/signout-callback-oidc"
+    ],
+    "frontChannelLogoutUri": "null",
+    "frontChannelLogoutSessionRequired": true,
+    "backChannelLogoutUri": "null",
+    "backChannelLogoutSessionRequired": true,
+    "allowOfflineAccess": true,
+    "allowedScopes": [
+        "openid",
+        "profile",
+        "email",
+        "offline_access",
+        "exchangeBooks.write"
+    ],
+    "alwaysIncludeUserClaimsInIdToken": true,
+    "identityTokenLifetime": 300,
+    "accessTokenLifetime": 3600,
+    "authorizationCodeLifetime": 300,
+    "absoluteRefreshTokenLifetime": 2592000,
+    "slidingRefreshTokenLifetime": 1296000,
+    "consentLifetime": null,
+    "refreshTokenUsage": 0,
+    "updateAccessTokenClaimsOnRefresh": false,
+    "refreshTokenExpiration": 1,
+    "accessTokenType": 1,
+    "enableLocalLogin": true,
+    "identityProviderRestrictions": [],
+    "includeJwtId": true,
+    "claims": [],
+    "alwaysSendClientClaims": true,
+    "clientClaimsPrefix": "client_",
+    "pairWiseSubjectSalt": null,
+    "userSsoLifetime": null,
+    "userCodeType": null,
+    "deviceCodeLifetime": 300,
+    "allowedCorsOrigins": [],
+    "properties": {}
+}
